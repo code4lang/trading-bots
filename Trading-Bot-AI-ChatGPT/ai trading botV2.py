@@ -6,10 +6,9 @@ import pandas as pd
 
 # Load BTC price data from a CSV file or any other source
 btc_data = pd.read_csv("C:/Users/bdefe/Desktop/trading bots/Trading-Bot-AI-ChatGPT/btc_data_2015.csv")  # Replace 'btc_data_2015.csv' with the actual file name
-
 # Preprocess the BTC price data
-x_train = btc_data['Date']  # Replace 'Date' with the actual column name containing the dates
-y_train = btc_data['Price']  # Replace 'Price' with the actual column name containing the BTC prices
+x_train = pd.to_numericbtc_(data['Date'])  # Replace 'Date' with the actual column name containing the dates
+y_train = pd.to_numericbtc_(data['Price(USD)'])  # Replace 'Price' with the actual column name containing the BTC prices
 
 # Normalize the BTC prices between 0 and 1
 y_train = (y_train - y_train.min()) / (y_train.max() - y_train.min())
