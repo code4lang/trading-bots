@@ -102,11 +102,13 @@ class Scraper():
             
             # iteration to scrape posts
             for post in content:
+                
                 # get the title
                 title = post.find('h2').text
                 # get the price
                 price = post.find('span', class_='andes-money-amount__fraction').text
                 # get the url post
+                location = post.find('span', class_='ui-search-item__group__element ui-search-item__location shops__items-group-details').text
                 post_link = post.find("a")["href"]
                 # get the url image
                 try:
@@ -122,7 +124,8 @@ class Scraper():
                     "title": title,
                     "price": price,
                     "post link": post_link,
-                    "image link": img_link            
+                    "image link": img_link,
+                    "location":location           
                 }
                 # save the dictionaries in a list
                 self.data.append(post_data)
@@ -131,7 +134,7 @@ class Scraper():
     def export_to_csv(self):
         # export to a csv file
         df = pd.DataFrame(self.data)
-        df.to_csv(r"data/mercadolibre_scraped_data.csv", sep=";")
+        df.to_csv(r"/workspaces/trading-bots/MercadoLibre-Scraper/data/mercadolibre_scraped_data.csv", sep=";")
 
 if __name__ == "__main__":
     s = Scraper()
