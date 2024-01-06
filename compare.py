@@ -18,10 +18,11 @@ for product in products:
 
     # Extract the column containing the buyer information (e.g., email address)
     buyer_col = 'seller'
-
+    a=list(buyer_col)
+    print(a)
     # Create a dictionary to keep track of how many products each buyer has
     product_counts = {}
-    print(df)
+    #print(df)
     # Check if 'title' is in df.columns before iterating over rows
     if 'title' in df.columns:
         for index, row in df.iterrows():

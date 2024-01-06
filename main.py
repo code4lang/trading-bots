@@ -82,7 +82,7 @@ class Scraper():
         page_number = 50
         for i in range(0, 10000, 50):
             urls.append(f"{self.base_url}{cleaned_name}_Desde_{page_number + 1}_NoIndex_True")
-            if len(urls)>=2: break
+            if len(urls)>=1: break
             page_number += 50
 
         # create a list to save the data
@@ -137,8 +137,10 @@ class Scraper():
                         # Verifica que encontraste un match
                         if match is not None:
                             seller = match.group(1)
-                            print(seller)
-                        else: print("No se pudo encontrar la información del vendedor.")
+                            
+                        else: 
+                            print("No se pudo encontrar la información del vendedor.")
+                            seller=None
                     else: print(f"Error al hacer la solicitud: {response.status_code}")
                 except: print(f"Error request")      
                 # show the data already scraped
