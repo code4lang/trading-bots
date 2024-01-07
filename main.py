@@ -82,7 +82,7 @@ class Scraper():
         page_number = 50
         for i in range(0, 10000, 50):
             urls.append(f"{self.base_url}{cleaned_name}_Desde_{page_number + 1}_NoIndex_True")
-            if len(urls)>=1: break
+            if len(urls)>=5: break
             page_number += 50
 
         # create a list to save the data

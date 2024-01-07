@@ -1,14 +1,15 @@
 import pandas as pd
 from  main import Scraper
 # Define a list of product names to search for
-products = ["rtx 4060", "pantalla 4k", "macbook pro"]
+products = ["rtx 4060", "pantalla 4k", "ram ddr5"]
 
 # Create a dictionary to store the results of each search
-results = {}
-
+results = []
+bestseller=[]
 # Loop through each product in the list and search for it on a search engine
-for product in products:
+for index,product in enumerate(products):
     print(product)
+    print(index)
     s2=Scraper()
     s2.menu(mode="Argentina")
     s2.scraping(product=product)
@@ -17,30 +18,29 @@ for product in products:
     df = pd.read_csv("/workspaces/trading-bots/MercadoLibre-Scraper/data/mercadolibre_scraped_data.csv",delimiter=';')
 
     # Extract the column containing the buyer information (e.g., email address)
-    buyer_col = 'seller'
-    a=list(buyer_col)
-    print(a)
+    
+    results.append(df[['seller','post link']])
+    #print(results)
     # Create a dictionary to keep track of how many products each buyer has
     product_counts = {}
-    #print(df)
+    optionseller=[]
+    
     # Check if 'title' is in df.columns before iterating over rows
-    if 'title' in df.columns:
-        for index, row in df.iterrows():
-            # Convert all products into a set to remove duplicates
-            print("line: ",(row['title']))
-            for product in set(row['title'].split(' ')):
-                if product not in product_counts:
-                    product_counts[product] = {buyer: 1 for buyer in row.index.tolist()}
-                # Iterate through each buyer in the current row and add their corresponding quantity to the dictionary
-                print("element  : ",product_counts)
-                if f'Quantity_{buyer}' in row:
-                    product_counts[product][buyer] += int(row[f'Quantity_{buyer}'])
-                else:
-                    print(f"La clave 'Quantity_{buyer}' no se encuentra en el DataFrame o serie.")
+    if index>0:
+        set1 = set(list(results[index-1]['seller'],results[index-1]['post link']))
+        set2 = set(list(results[index]['seller'],results[index]['post link']))
+        print(set1)
+        print(set2)
+        # Encontrar la intersección de los dos conjuntos
+        interseccion = set1 & set2
 
-    else:
-        print("La columna 'title' no se encuentra en el DataFrame.")
+        # Convertir la intersección a una lista
+        bestseller = list(interseccion)
+        print("bestseller:  ",bestseller)
 
+print(bestseller)
+'''
 for product in products:
     if product in results: print(results[product])
 print(*[results[i] for i in results])
+'''
