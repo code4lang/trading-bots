@@ -28,9 +28,9 @@ for index,product in enumerate(products):
     # Check if 'title' is in df.columns before iterating over rows
     if index>0:
         #set1 = set((sell,link) for 
-        set1 = list(set(results[index-1]['seller']), set(results[index-1]['post link']))
+        set1 = [set(results[index-1]['seller']), set(results[index-1]['post link'])]
 
-        set2 = list(set(results[index]['seller']), set(results[index]['post link']))
+        set2 = [set(results[index]['seller']), set(results[index]['post link'])]
         print(set1)
         print(set2)
         # Encontrar la intersección de los dos conjuntos
