@@ -14,7 +14,7 @@ for product in products:
     s2.scraping(product=product)
     s2.export_to_csv()
 
-    df = pd.read_csv("C:/Users/Utilisateur/OneDrive/Escritorio/trading-bots/data/mercadolibre_scraped_data.csv  ",delimiter=';')
+    df = pd.read_csv("/workspaces/trading-bots/1mercado/data/mercadolibre_scraped_data.csv",delimiter=';')
 
     # Extract the column containing the buyer information (e.g., email address)
     buyer_col = 'seller'
@@ -32,10 +32,10 @@ for product in products:
                     product_counts[product] = {buyer: 1 for buyer in row.index.tolist()}
                 # Iterate through each buyer in the current row and add their corresponding quantity to the dictionary
                 print("element  : ",product_counts)
-                if f'Quantity_{buyer}' in row:
+                if 'Quantity_{buyer}' in row:
                     product_counts[product][buyer] += int(row[f'Quantity_{buyer}'])
                 else:
-                    print(f"La clave 'Quantity_{buyer}' no se encuentra en el DataFrame o serie.")
+                    print(f"La clave  no se encuentra en el DataFrame o serie.")
 
     else:
         print("La columna 'title' no se encuentra en el DataFrame.")

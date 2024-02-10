@@ -164,7 +164,7 @@ class Scraper():
     def export_to_csv(self):
         # export to a csv file
         df = pd.DataFrame(self.data)
-        df.to_csv("C:/Users/Utilisateur/OneDrive/Escritorio/trading-bots/data/mercadolibre_scraped_data.csv", sep=";")
+        df.to_csv("/workspaces/trading-bots/1mercado/data/mercadolibre_scraped_data.csv", sep=";")
 
 if __name__ == "__main__":
     s = Scraper()
