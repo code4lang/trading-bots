@@ -1,10 +1,13 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options
 from pytrends.request import TrendReq
 
-# Set up the Chrome WebDriver
-driver = webdriver.Edge(service=Service(executable_path='/workspaces/trading-bots/msedgedriver.exe'))  # Replace with the actual path to your chromedriver
+options = Options()
+options.add_argument("--headless")# Set up the Chrome WebDriver
+driver = webdriver.Edge(service=Service(executable_path='/workspaces/trading-bots/msedgedriver.exe'),options=options)  # Replace with the actual path to your chromedriver
 
 # Define your Amazon Associate tag
 associate_tag = 'your_associate_tag_here'
@@ -12,6 +15,7 @@ associate_tag = 'your_associate_tag_here'
 # Fetch trending search terms from Google Trends (adjust country as needed)
 pytrends = TrendReq(hl='en-US', tz=360)
 trending_searches = pytrends.trending_searches(pn='united_states')[:5]
+print("trending: ",trending_searches)
 
 # Visit each product page, extract details, and create banners
 for search_term in trending_searches:
